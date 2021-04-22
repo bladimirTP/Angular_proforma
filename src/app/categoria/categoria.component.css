@@ -1,0 +1,37 @@
+#lado{
+    margin-left:2% ;
+    margin-right: 35%;
+    margin-top: 2%;
+}
+ #selec{
+     height: 38px;
+     width: 210px;
+ }
+
+ #nuevo{
+      margin-left: 20%;
+ }
+ #boton{
+padding-left: 3%;
+/* margin-left: 25px; */
+}
+#save{
+    margin-left: 1%;
+    }
+#contain{
+ margin-left: 10%;
+}
+#eliminar{
+    margin-left: 2%;
+   }   
+
+   #actualizar{
+    margin-left: 2%;
+   }
+
+   
+#panelbodi{
+    margin-left: 50px;
+    margin-right: 40px;
+
+}

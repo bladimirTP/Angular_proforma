@@ -1,0 +1,190 @@
+<div>
+    <H2>productos</H2>
+    
+    <div class="row">
+        <div class="col-sm-2">
+             <button  (click)="resetForm();Obtenercategorias()"  class="btn btn-primary">Nuevo Producto</button>
+       </div>
+       
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <label id="inputs" for="idcategoria">Categoria</label>
+            <select   name="filtrar" id="inputs"  [(ngModel)]="filtroproducto"  class="form-control">
+                <option selected>
+                   
+                </option>
+                <option *ngFor="let item of  seleccioncate">
+                    {{item.categoria}}
+                </option>
+                
+            </select>
+          
+        </div>
+        <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <label id="inputs" for="idcategoria">buscar</label>
+            <input  name="filtrar" id="inputs"  [(ngModel)]="filtroproducto"  class="form-control">
+        </div>
+         -->
+   </div>
+    <div  id="lado" class="row">
+      
+        <div  class="form-control" *ngIf="estate==1">
+            <div class="row">
+            <div id="panelbodi" >
+            <div  class="panel-body">
+                <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group">
+                        <label id="inputs" for="controNombre">Nombre</label>
+                        <input id="inputs" type="text" [(ngModel)]="agregarproductos.nombre" class="form-control" placeholder="nombre categoria">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label id="inputs" for="idcategoria">Categoria</label>
+					<select id="inputs" (change)="rescategoria($event)"  class="form-control">
+                        <option *ngFor="let cate of categoria" [value]="cate.id">
+                            {{cate.nombre}}
+                        </option>
+                    </select>
+                  
+                </div>
+               
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group">
+                        <label  id="inputs" for="controNombre">precio</label>
+                        <input id="inputs" type="text" [(ngModel)]="agregarproductos.precio" class="form-control" placeholder="nombre categoria">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group">
+                        <label id="inputs" for="cantidad">cantidad</label>
+                        <input id="inputs" type="text" [(ngModel)]="agregarproductos.cantidad" class="form-control" placeholder="nombre categoria">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group">
+                        <label id="inputs" for="marca">marca</label>
+                        <input id="inputs" type="text" [(ngModel)]="agregarproductos.marca" class="form-control" placeholder="nombre categoria">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label id="inputs" for="controNombre">descripcion</label>
+                        <input id="inputs" type="text" [(ngModel)]="agregarproductos.descripcion" class="form-control" placeholder="nombre categoria">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label id="inputs" for="controNombre">imagen</label>
+                        <input id="inputs" type="file" (change)=" onfilechange($event)" class="form-control" placeholder="nombre categoria">
+                    </div>
+                </div>
+            </div>
+             </div>
+             </div>
+            </div>
+            <div id="boton" class="col-6">
+                <button type="button" (click)="desactivarCreate()" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button id="save" type="button" (click)="agregarproducto()" class="btn btn-success" data-dismiss="modal">Save</button>
+           </div>
+        
+        </div>
+    </div>
+
+ <div id="target"  class="row">
+    <div class="col-sm-6" *ngFor="let item of producto|filterProducto:'categoria':filtroproducto" id="card">
+        <div  class="card user-card contact-item p-md"  >
+            <div class="media">
+                <div class="media-left">
+                    <div class="avatar avatar-xl avatar-circle">
+                        <!-- <img id="producto" src="assets/public/img/101.jpg" alt="contact image"> -->
+                        <img id="producto" src="http://localhost:8000/imagenes/{{produ}}/{{item.imagen}}"  alt="contact image">
+                    
+                    </div>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading title-color">{{item.nombre}}</h4>
+                    <h4 class="media-meta">{{item.precio}} .BS</h4>
+                    <h6 class="media-meta">Categ: {{item.categoria}}</h6>  
+                    <h6 class="media-meta">Empresa: {{item.empresa}}</h6>  
+                    <h6 class="media-meta">{{item.descripcion}}</h6>         
+                </div>
+               
+            </div>
+               
+            <div class="contact-item-actions">
+                <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" (click)="actualizarproducto(item);desactivarCreate()" data-target="#contactModal"><i class="fa fa-edit"></i></a>
+                <a href="javascript:void(0)" class="btn btn-danger" data-toggle="modal" (click)="actualizarproducto(item);desactivarCreate()" data-target="#deleteItemModal"><i class="fa fa-trash"></i></a>
+            </div><!-- .contact-item-actions -->
+        </div><!-- card user-card -->
+    </div><!-- END column -->
+         <!-- hasta aqui -->
+    
+ </div><!-- #contacts-list -->
+
+                 <!-- empiesa el mofdal para actualizar -->
+    <div id="contactModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Create / update contact</h4>
+                </div>
+                <div action="#" id="newContactForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="controNombre">Nombre</label>
+                            <input type="text" [(ngModel)]="agregarproductos.nombre" class="form-control" placeholder="nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="controNombre">Precio</label>
+                            <input type="text" [(ngModel)]="agregarproductos.precio" class="form-control" placeholder="precio">
+                        </div>
+                        <div class="form-group">
+                            <label for="controNombre">Marca</label>
+                            <input type="text" [(ngModel)]="agregarproductos.marca" class="form-control" placeholder="marca">
+                        </div>
+                        <div class="form-group">
+                            <label for="controNombre">Descripcion</label>
+                            <input type="text" [(ngModel)]="agregarproductos.descripcion" class="form-control" placeholder="descripcion">
+                        </div>
+                        
+                        <div class="form-group" *ngIf="agregarproductos.id">
+                            <select id="selec" name="select" [(ngModel)]="agregarproductos.estado"  *ngIf="agregarproductos.id!=''">
+                                <option *ngIf="agregarproductos.estado=='disponible',else activar" selected>{{agregarproductos.estado}}</option>
+                                <option type="text"  >inactivo</option>
+                               
+                                 <ng-template #activar>
+                                    <option  type="text">activo</option> 
+                                </ng-template> 
+                             </select>
+                         
+                          </div>       
+                       
+                    </div><!-- .modal-body -->
+                    <div class="modal-footer">
+                    <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" (click)="agregarproducto()" class="btn btn-success" data-dismiss="modal">Save</button>
+                    </div><!-- .modal-footer -->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+            <!-- termina el modal para actulizar -->
+             <!-- delete item Modal -->
+      <div id="deleteItemModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete item</h4>
+                </div>
+                <div class="modal-body">
+                    <h5>Do you really want to delete this item ?</h5>
+                </div><!-- .modal-body -->
+                <div class="modal-footer">
+                    <button type="button" (click)="eliminarproducto()" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                </div><!-- .modal-footer -->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

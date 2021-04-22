@@ -1,0 +1,54 @@
+<div>
+<H1>prueba del modulo Http</H1>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <table class="table table-striped">
+                <thead>
+                   <th>Id</th>
+                   <th>nombre</th>
+                   <th>Apellido</th>
+                   <th>Edad</th>
+                   <th>Profesional</th>
+                   <td>*</td>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of personas">
+                        <td>{{item.id}}</td>
+                        <td>{{item.Nombre}}</td>
+                        <td>{{item.Apellido}}</td>
+                        <td>{{item.Edad}}</td>
+                        <td>{{item.Isprofesional}}</td>
+                        <td>
+                            <button (click)="eliminarPersona(item.id)" class="btn btn-primary">Eliminar</button>
+                       </td>
+       
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label for="controNombre">Nombre</label>
+                <input type="text" [(ngModel)]="agregarPersonaRegistro.Nombre" class="form-control" placeholder="nombre persona">
+            </div>
+            <div class="form-group">
+                <label for="controNombre">Apellido</label>
+                <input type="text" [(ngModel)]="agregarPersonaRegistro.Apellido" class="form-control" placeholder="nombre Apellido">
+            </div>
+            <div class="form-group">
+                <label for="controNombre">Edad</label>
+                <input type="text" [(ngModel)]="agregarPersonaRegistro.Edad" class="form-control" placeholder="Edad">
+            </div>
+            <div class="form-group">
+                <label for="controNombre">profesional</label>
+                <input type="text" [(ngModel)]="agregarPersonaRegistro.Isprofesional" class="form-control" placeholder="profesional">
+            </div>
+            <div>
+                <button (click)="AgregarPersona()" class="btn btn-primary">Agreagar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>

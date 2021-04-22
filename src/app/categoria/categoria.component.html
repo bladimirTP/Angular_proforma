@@ -1,0 +1,107 @@
+    <div class="top">
+        <button  (click)="resetForm()"  class="btn btn-outline mw-md btn-primary"><i class="fas fa-plus"></i>Nueva Categoria</button>
+    </div>
+         
+    <div  id="lado">
+           <div class="form-control" *ngIf="estate==1">
+            <div >
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <label for="control-demo-1" class="col-sm-3">Nombre</label>
+                    <div class="col-sm-12">
+                        <input  type="text"  [(ngModel)]="agregarPersonaRegistro.nombre" id="control-demo-1" class="form-control">
+                    </div>
+                   
+                </div><!-- .form-group -->
+            </div>
+          
+            </div>
+            <div id="boton">
+                <button type="button" (click)="desactivarCreate()" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button id="save" type="button" (click)="AgregarCategoria()" class="btn btn-success" data-dismiss="modal">Save</button>
+           </div>
+           </div>
+           
+        
+    </div>
+    
+   
+         <div>
+                <table class="table table-striped">
+                    <thead>
+                       <th>Id</th>
+                       <th>nombre</th>
+                       <th>Estado</th>
+                       <td>*</td>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of categoria">
+                            <td>{{item.id}}</td>
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.estado}}</td>
+                            
+                            <td >
+                                <button id="eliminar" (click)="actualizarcategoria(item);desactivarCreate()" data-toggle="modal" data-target="#deleteItemModal" class="btn btn-primary">Eliminar</button>
+                                <button  id="actualizar" (click)="actualizarcategoria(item);desactivarCreate()" data-toggle="modal" data-target="#contactModal"   class="btn btn-primary">Actualizar</button>
+                           </td>
+                           
+           
+                        </tr>
+                    </tbody>
+                </table> 
+          </div>
+         <!-- empiesa el mofdal para actualizar -->
+    <div id="contactModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Create / update contact</h4>
+                </div>
+                <div action="#" id="newContactForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="controNombre">Nombre</label>
+                            <input type="text" [(ngModel)]="agregarPersonaRegistro.nombre" class="form-control" placeholder="nombre categoria">
+                        </div>
+                           <div class="form-group" *ngIf="agregarPersonaRegistro.id">
+                             <select id="selec" name="select" [(ngModel)]="agregarPersonaRegistro.estado"  *ngIf="agregarPersonaRegistro.id!=''">
+                                 <option *ngIf="agregarPersonaRegistro.estado=='activo',else activar" selected>{{agregarPersonaRegistro.estado}}</option>
+                                 <option type="text"  >inactivo</option>
+                                
+                                  <ng-template #activar>
+                                     <option  type="text">activo</option> 
+                                 </ng-template> 
+                              </select>
+                          
+                           </div>
+                       
+                    </div><!-- .modal-body -->
+                    <div class="modal-footer">
+                    <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" (click)="AgregarCategoria()" class="btn btn-success" data-dismiss="modal">Save</button>
+                    </div><!-- .modal-footer -->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+            <!-- termina el modal para actulizar -->
+             <!-- delete item Modal -->
+      <div id="deleteItemModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete item</h4>
+                </div>
+                <div class="modal-body">
+                    <h5>Do you really want to delete this item ?</h5>
+                </div><!-- .modal-body -->
+                <div class="modal-footer">
+                    <button type="button" (click)="eliminarcategoria()" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                </div><!-- .modal-footer -->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- end content -->
+

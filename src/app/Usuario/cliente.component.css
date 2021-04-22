@@ -1,0 +1,35 @@
+#producto{
+    height: 250px;
+    width: 250px;
+}
+#buscar{
+    width: 280px;
+}
+
+#target{
+    margin-left: 5px;
+ 
+}
+
+#panelbodi{
+    margin-left: 50px;
+    margin-right: 40px;
+
+}
+#boton{
+    margin-left: 44px;
+ 
+}
+#nuevo{
+    margin-left: -32%;
+}
+#contenedor{
+    margin-left: 5px;
+}
+@media only screen and (max-width: 600px) {
+     #inputs {
+      width: 350px;
+      margin-left:25px ;
+    }
+  }
+

@@ -1,0 +1,90 @@
+<div>
+<div class="container">
+     
+    <div class="row">
+        <div class="col-md-12">
+        
+            <table class="table table-striped">
+                <thead>
+                   <th>id</th>
+                   <th>Numero</th>
+                   <th>Descuento</th>
+                   <th>Total</th>
+                   <th>Estado</th>
+                   <th>Empresa</th>
+                   <td>*</td>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pro of proforma">
+                        <td>{{pro.proforma}}</td>
+                        <td>{{pro.numero}}</td>
+                        <td>{{pro.descuento}}</td>
+                        <td>{{pro.total}}</td>
+                        <td>{{pro.estado}}</td>
+                        <td>{{pro.empresa}}</td>
+                      
+                        
+                        <td>
+                            <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" (click)="obtenerproformadetalle(pro.proforma)"><i class="fa fa-edit"></i></a>
+                            <button  id="actualizar" (click)="obtenerproformadetalle(pro.proforma);datosproforma(pro)" data-toggle="modal" data-target="#contactModal"   class="btn btn-primary">ver detalle</button>
+                       </td>
+                                  
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+     <!-- empiesa el mofdal para actualizar -->
+     <div id="contactModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Detalle de la proforma</h4>
+                </div>
+                <div action="#" id="newContactForm">
+                    <div class="modal-body">
+                    
+                        <div class="container">
+                            <span>Numero:    {{datoproforma.numero}}</span><br>
+                            <span>Descuento:    {{datoproforma.descuento}}</span><br>
+                            <span>Estado:    {{datoproforma.estado}}</span><br>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                
+                                    <table class="table table-striped">
+                                        
+                                        <thead>
+                                           <th>producto</th>
+                                           <th>precio</th>
+                                           <th>cantidad</th>
+                                         
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of detalle">
+                                             
+                                                <td>{{item.nombre}}</td>
+                                                <td>{{item.precio}}</td>
+                                                <td>{{item.cantidad}}</td>            
+                                            </tr>
+                                            
+                                        </tbody>
+                            
+                                    </table>
+                                    <span id="total">Total:    {{datoproforma.total}}</span><br> 
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div><!-- .modal-body -->
+                    <div class="modal-footer">
+                    <!-- <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" (click)="guardarUsuario()" class="btn btn-success" data-dismiss="modal">Save</button> -->
+                    </div><!-- .modal-footer -->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

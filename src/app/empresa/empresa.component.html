@@ -1,0 +1,167 @@
+<div>
+    <H2>Empresa</H2>
+    <div class="row">
+        <div class="col-sm-2">
+             <button  (click)="resetForm();ObtenerUsuario()"  class="btn btn-primary">Nuevo Producto</button>
+       </div>
+       
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <label id="inputs" for="idempresa">Empresa</label>
+            <select   name="filtrar" id="inputs"  [(ngModel)]="filtroempresa"  class="form-control">
+                <option selected>
+                   
+                </option>
+                <option *ngFor="let item of  empresa">
+                    {{item.nombre}}
+                </option>
+                
+            </select>
+          
+        </div>
+        <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <label id="inputs" for="idcategoria">buscar</label>
+            <input  name="filtrar" id="inputs"  [(ngModel)]="filtroproducto"  class="form-control">
+        </div>
+         -->
+   </div>
+    <div  id="lado" class="row">
+      
+        <div  class="form-control" *ngIf="estate==1">
+            <div class="row">
+            <div id="panelbodi" >
+            <div  class="panel-body">
+                <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group">
+                        <label id="inputs" for="controNombre">Nombre</label>
+                        <input id="inputs" type="text" [(ngModel)]="agregarempresa.nombre" class="form-control" placeholder="nombre categoria">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <label id="inputs" for="idcategoria">Usuario</label>
+					<select id="inputs" (change)="rescategoria($event)"  class="form-control">
+                        <option *ngFor="let user of usuarios" [value]="user.id">
+                            {{user.nombre}}
+                        </option>
+                    </select>
+                  
+                </div>
+               
+           
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        <label id="inputs" for="controNombre">Logo</label>
+                        <input id="inputs" type="file" (change)=" onfilechange($event)" class="form-control" placeholder="logo">
+                    </div>
+                </div>
+            </div>
+             </div>
+             </div>
+            </div>
+            <div id="boton" class="col-6">
+                <button type="button" (click)="desactivarCreate()" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button id="save" type="button" (click)="AgregarEmpresa()" class="btn btn-success" data-dismiss="modal">Save</button>
+           </div>
+        
+        </div>
+    </div>
+<div id="target"  class="row">
+    <div class="col-sm-6" *ngFor="let item of empresa|filterEmpresa:'nombre':filtroempresa" id="card">
+        <div  class="card user-card contact-item p-md"  >
+            <div class="media">
+                <div class="media-left">
+                    <div class="avatar avatar-xl avatar-circle">
+                        <!-- //<img id="producto" src="assets/public/img/101.jpg" alt="contact image"> -->
+                        <img id="empresa" src="http://localhost:8000/imagenes/{{item.nombre}}/logo/{{item.logo}}"  alt="contact image">
+                    
+                    </div>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading title-color">Empresa: {{item.nombre}}</h4>
+                    <h4 class="media-meta">{{item.estado}}</h4>
+                    <h6 class="media-meta">Usuario: {{item.user_id}}</h6>        
+                </div>
+               
+            </div>
+               
+            <div class="contact-item-actions">
+                <a href="javascript:void(0)" class="btn btn-success" data-toggle="modal" (click)="actualizarempresa(item);desactivarCreate()" data-target="#contactModal"><i class="fa fa-edit"></i></a>
+                <a href="javascript:void(0)" class="btn btn-danger" data-toggle="modal" (click)="actualizarempresa(item);desactivarCreate()" data-target="#deleteItemModal"><i class="fa fa-trash"></i></a>
+            </div><!-- .contact-item-actions -->
+        </div><!-- card user-card -->
+    </div><!-- END column -->
+         <!-- hasta aqui -->
+    
+</div><!-- #contacts-list -->
+
+                 <!-- empiesa el mofdal para actualizar -->
+    <div id="contactModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Create / update contact</h4>
+                </div>
+                <div action="#" id="newContactForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="controNombre">Nombre</label>
+                            <input type="text" [(ngModel)]="agregarempresa.nombre" class="form-control" placeholder="nombre">
+                        </div>
+                       
+                        <!-- <div class="form-group">
+                            <label for="controNombre">Marca</label>
+                            <input type="text" [(ngModel)]="agregarproductos.marca" class="form-control" placeholder="marca">
+                        </div>
+                        <div class="form-group">
+                            <label for="controNombre">Descripcion</label>
+                            <input type="text" [(ngModel)]="agregarproductos.descripcion" class="form-control" placeholder="descripcion">
+                        </div> -->
+                        
+                        <div class="form-group" *ngIf="agregarempresa.id">
+                            <select id="selec" name="select" [(ngModel)]="agregarempresa.estado"  *ngIf="agregarempresa.id!=''">
+                                <option *ngIf="agregarempresa.estado=='activo',else activar" selected>{{agregarempresa.estado}}</option>
+                                <option type="text"  >inactivo</option>
+                               
+                                 <ng-template #activar>
+                                    <option  type="text">activo</option> 
+                                </ng-template> 
+                             </select>
+                         
+                          </div>
+                          
+                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label id="inputs" for="controNombre">Logo</label>
+                                <input id="inputs" type="file" (change)=" onfilechange($event)" class="form-control" placeholder="logo">
+                            </div>
+                        </div>
+                           
+                       
+                    </div><!-- .modal-body -->
+                    <div class="modal-footer">
+                    <button type="button"  class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" (click)="AgregarEmpresa()" class="btn btn-success" data-dismiss="modal">Save</button>
+                    </div><!-- .modal-footer -->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+            <!-- termina el modal para actulizar -->
+             <!-- delete item Modal -->
+      <div id="deleteItemModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete item</h4>
+                </div>
+                <div class="modal-body">
+                    <h5>Do you really want to delete this item ?</h5>
+                </div><!-- .modal-body -->
+                <div class="modal-footer">
+                    <button type="button" (click)="EliminarEmpresa()" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                </div><!-- .modal-footer -->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
